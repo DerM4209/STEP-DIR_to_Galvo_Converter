@@ -5,7 +5,7 @@ byte data;
 float radian = 0.0174532925;
 float max_bits = 4096;                                                //Change if you use a different setup
 float max_scan_angle_degree = 25;                                     //Change if you use a different setup
-float half_axis_lenght = 100;                                         //Change if you use a different setup 
+float half_axis_lenght = 100;                                         //Change if you use a different setup
 float steps_per_unit = 100;                                           //Change if you use a different setup
 float max_scan_angle_radian = max_scan_angle_degree * radian;
 float height = half_axis_lenght / tan(max_scan_angle_radian / 2);
