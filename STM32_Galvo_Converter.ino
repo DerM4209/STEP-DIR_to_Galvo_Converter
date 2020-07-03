@@ -5,8 +5,8 @@ byte data;
 float radian = 0.0174532925;
 float max_bits = 4096;                                                //Change if you use a different setup
 float max_scan_angle_degree = 25;                                     //Change if you use a different setup
-float half_axis_lenght = 100;                                         //Change if you use a different setup
-float steps_per_unit = 100;                                           //Change if you use a different setup
+float half_axis_lenght = 200;                                         //Change this value to get the right dimensions for cutting and engraving
+float steps_per_unit = 100;                                           //Same as in your controller config
 float max_scan_angle_radian = max_scan_angle_degree * radian;
 float height = half_axis_lenght / tan(max_scan_angle_radian / 2);
 float bit_per_angle = max_bits / max_scan_angle_radian;
@@ -60,7 +60,7 @@ void loop()
   float angle_to_dac = scan_angle * bit_per_angle;
   unsigned int dac_value = map(angle_to_dac, -2048, 2048, 0, 4095);
   setOutput(dac_value);
-  Serial.println(dac_value);
+  Serial.println(half_axis_lenght);
   delay(10);
 
   if (dac_value == 0) {
