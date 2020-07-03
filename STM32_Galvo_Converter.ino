@@ -5,12 +5,12 @@ byte data;
 float radian = 0.0174532925;
 float max_bits = 4096;                                                //Change if you use a different setup
 float max_scan_angle_degree = 25;                                     //Change if you use a different setup
-float half_axis_lenght = 200;                                         //Change this value to get the right dimensions for cutting and engraving
+float half_axis_length = 200;                                         //Change this value to get the right dimensions for cutting and engraving
 float steps_per_unit = 100;                                           //Same as in your controller config
 float max_scan_angle_radian = max_scan_angle_degree * radian;
-float height = half_axis_lenght / tan(max_scan_angle_radian / 2);
+float height = half_axis_length / tan(max_scan_angle_radian / 2);
 float bit_per_angle = max_bits / max_scan_angle_radian;
-float origin = 0 - half_axis_lenght;
+float origin = 0 - half_axis_length;
 volatile long steps = 0;
 
 void setOutput(unsigned int val)
@@ -26,8 +26,8 @@ void setOutput(unsigned int val)
 void pulse() {
   if (digitalRead(PB7) == LOW) {
     steps = steps + 1;
-    if (steps > (half_axis_lenght * steps_per_unit)) {
-      steps = half_axis_lenght * steps_per_unit;
+    if (steps > (half_axis_length * steps_per_unit)) {
+      steps = half_axis_length * steps_per_unit;
     }
   }
   if (digitalRead(PB7) == HIGH) {
@@ -60,7 +60,7 @@ void loop()
   float angle_to_dac = scan_angle * bit_per_angle;
   unsigned int dac_value = map(angle_to_dac, -2048, 2048, 0, 4095);
   setOutput(dac_value);
-  Serial.println(half_axis_lenght);
+  Serial.println(half_axis_length);
   delay(10);
 
   if (dac_value == 0) {
